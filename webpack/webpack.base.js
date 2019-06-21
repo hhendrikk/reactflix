@@ -5,7 +5,8 @@ const { join } = require('path')
 const paths = {
   root: join(__dirname, '..'),
   src: join(__dirname, '..', 'src'),
-  dist: join(__dirname, '..', 'dist')
+  dist: join(__dirname, '..', 'dist'),
+  modules: join(__dirname, '..', 'node_modules')
 }
 
 module.exports = {
@@ -52,7 +53,11 @@ module.exports = {
 
   cssLoader: {
     test: /\.s?[ac]ss$/,
-    include: paths.src,
+    include: [
+      paths.src,
+      join(paths.modules, 'normalize.css'),
+      join(paths.modules, 'milligram')
+    ],
     use: [
       'style-loader',
       'css-loader',

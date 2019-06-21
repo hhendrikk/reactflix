@@ -9,6 +9,14 @@ import App from './app'
 
 const store = configureStore()
 
+const db = firebase.database()
+
+db.on('value', (snapshot) => {
+  console.log(snapshot)
+}, (error) => {
+  console.log(error)
+})
+
 const render = Component => {
   ReactDOM.render(
     <Provider store={store}>

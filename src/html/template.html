@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>
     <%= htmlWebpackPlugin.options.title  %>
@@ -12,6 +12,19 @@
 
 <body>
   <div data-js="app"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/6.2.1/firebase-app.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyBY1-xYzK6m5ZcVTeSGptBoHR2dIvher7E",
+      authDomain: "reactflix-33df5.firebaseapp.com",
+      databaseURL: "https://reactflix-33df5.firebaseio.com",
+      projectId: "reactflix-33df5",
+      storageBucket: "",
+      messagingSenderId: "301860615032",
+      appId: "1:301860615032:web:7ae5088cae9e33a2"
+    });
+  </script>
 </body>
 
 </html>
