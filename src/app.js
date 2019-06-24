@@ -4,8 +4,12 @@ import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import styled, { createGlobalStyle } from 'styled-components'
 
+import { headerHeight, footerHeight } from 'util/constants'
 import VideoList from 'components/video-list'
 import VideoSingle from 'components/video-single'
+import RegisterVideo from 'components/register-video'
+import Header from 'components/header'
+import Footer from 'components/footer'
 
 import 'normalize.css'
 import 'milligram'
@@ -13,23 +17,17 @@ import 'milligram'
 const App = () => (
   <Container>
     <GlobalStyle />
-    <Header>
-      <h1>Reactflix</h1>
-    </Header>
+    <Header />>
 
     <Main>
+      <RegisterVideo />
       <VideoSingle />
       <VideoList />
     </Main>
 
-    <Footer>
-      &copy; 2018
-    </Footer>
+    <Footer />
   </Container>
 )
-
-const headerHeight = '60px'
-const footerHeight = '30px'
 
 const GlobalStyle = createGlobalStyle`
   html, body, div[data-js="app"] {
@@ -43,16 +41,6 @@ const Container = styled.div`
 
 const Main = styled.main`
   min-height: calc(100% - ${headerHeight} - ${footerHeight});
-`
-
-const Header = styled.header`
-  height: ${headerHeight};
-  background: #333
-`
-
-const Footer = styled.footer`
-  height: ${footerHeight};
-  background: #333
 `
 
 export default hot(App)

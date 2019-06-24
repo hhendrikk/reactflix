@@ -7,7 +7,7 @@ import Play from 'components/play'
 
 const VideoList = () => (
   <Container>
-    {Array.from({ length: 10 }).map((item, index) => (
+    {Array.from({ length: 10 }).map((key, index) => (
       <Video key={index}>
         <VideoThumb>
           <PlayStyled />

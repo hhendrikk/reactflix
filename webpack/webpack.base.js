@@ -95,11 +95,13 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       'src': paths.src,
+      'configs': join(paths.src, 'configs'),
       'components': join(paths.src, 'components'),
       'sass': join(paths.src, 'sass'),
       'images': join(paths.src, 'images'),
       'react-dom': '@hot-loader/react-dom',
-      'reducers': join(paths.src, 'redux-flow', 'reducers')
+      'reducers': join(paths.src, 'redux-flow', 'reducers'),
+      'util': join(paths.src, 'util')
     }
   }
 }
