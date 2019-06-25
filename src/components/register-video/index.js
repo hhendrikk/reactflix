@@ -4,8 +4,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { addVideo } from 'reducers/videos/action-creators'
+import { onCloseRegisterFormVideo } from 'reducers/ui/action-creators'
 
-const RegisterVideo = ({ onSubmit }) => (
+const RegisterVideo = ({ onSubmit, onCloseRegisterFormVideo }) => (
   <Form onSubmit={onSubmit}>
     <h2>Cadastrar vídeo</h2>
     <label htmlFor='id'>ID do vídeo:</label>
@@ -15,7 +16,7 @@ const RegisterVideo = ({ onSubmit }) => (
     <input type='text' id='title' name='title' />
 
     <button type='submit'>Cadastrar</button>
-    <ButtonClose type='button'>&times;</ButtonClose>
+    <ButtonClose type='button' onClick={onCloseRegisterFormVideo}>&times;</ButtonClose>
   </Form>
 )
 
@@ -32,7 +33,8 @@ const mapsDispatchToProps = (dispatch) => ({
     await dispatch(addVideo({ id, title }))
     e.target.reset()
     e.target[0].focus()
-  }
+  },
+  onCloseRegisterFormVideo: () => dispatch(onCloseRegisterFormVideo())
 })
 
 const Form = styled.form`

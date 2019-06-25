@@ -11,3 +11,14 @@ export const addVideo = ({ id, title }) => async (dispatch) => {
     payload: { id, title }
   })
 }
+
+export const fetchVideos = () => (dispatch) => {
+  db.ref('videos').on('value', (snapshot) => {
+    snapshot.forEach((video) => {
+      dispatch({
+        type: ADD_VIDEO,
+        payload: video.val()
+      })
+    })
+  })
+}
