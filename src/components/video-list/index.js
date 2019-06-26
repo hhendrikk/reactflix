@@ -5,15 +5,18 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import Play from 'components/play'
+import { selectVideoSingle } from 'reducers/video-single/action-creators'
 
-const VideoList = ({ videos }) => (
+const VideoList = ({ videos, handleClick }) => (
   <Container>
     {Object.keys(videos).map((id) => (
       <Video key={id}>
-        <VideoThumb>
-          <PlayStyled />
-        </VideoThumb>
-        <VideoTitle>{videos[id].title}</VideoTitle>
+        <VideoLink href='#' onClick={handleClick(id)}>
+          <VideoThumb thumbnail={`http://img.youtube.com/vi/${id}/0.jpg`}>
+            <PlayStyled />
+          </VideoThumb>
+          <VideoTitle>{videos[id].title}</VideoTitle>
+        </VideoLink>
       </Video>
     ))}
   </Container>
@@ -27,9 +30,38 @@ const PlayStyled = styled(Play)`
   cursor: pointer;
 `
 
+const VideoThumb = styled.div`
+  border: 1px solid #999;
+  height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &:after{
+    content: "";
+    background-image: url(${(props) => props.thumbnail});
+    height: 360px;
+    width: 100%;
+    opacity: 0.3;
+    position: absolute;
+    z-index: -1;
+    transition: all .45s ease-out;
+  }
+`
+
 const Video = styled.section`
   &:hover ${PlayStyled} {
     transform: scale(1.5)
+  }
+
+  &:hover ${VideoThumb} {
+    &:after {
+      opacity: 1
+    }
+
+    & ${PlayStyled} {
+      fill: #eee
+    }
   }
 `
 
@@ -44,20 +76,23 @@ const Container = styled.div`
   }
 `
 
-const VideoThumb = styled.div`
-  border: 1px solid #999;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 const VideoTitle = styled.h2`
   font-size: 18px
+`
+
+const VideoLink = styled.a`
+  color: inherit;
 `
 
 const mapsStateToProps = (state) => ({
   videos: state.videos
 })
 
-export default connect(mapsStateToProps)(VideoList)
+const mapsDispatchToProps = (dispatch) => ({
+  handleClick: (id) => (e) => {
+    e.preventDefault()
+    dispatch(selectVideoSingle(id))
+  }
+})
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(VideoList)
