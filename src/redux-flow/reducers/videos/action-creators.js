@@ -1,6 +1,6 @@
 'use strict'
 
-import { ADD_VIDEO } from './actions'
+import { ADD_VIDEO, SORT_VIDEO_BY_TITLE } from './actions'
 import { db } from 'configs/firebase'
 
 export const addVideo = ({ id, title }) => async (dispatch) => {
@@ -20,5 +20,7 @@ export const fetchVideos = () => (dispatch) => {
         payload: video.val()
       })
     })
+
+    dispatch({ type: SORT_VIDEO_BY_TITLE })
   })
 }

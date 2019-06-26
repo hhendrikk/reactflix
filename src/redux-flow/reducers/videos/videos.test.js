@@ -3,7 +3,7 @@
 import { expect } from 'chai'
 import deepFreeze from 'deep-freeze'
 
-import { ADD_VIDEO } from './actions'
+import { ADD_VIDEO, SORT_VIDEO_BY_TITLE } from './actions'
 import videos from './index'
 
 it('should videos to be a function', () => {
@@ -71,5 +71,41 @@ it('should action UNKNOWN return current state', () => {
       title: 'title video 123'
     }
   }
+  expect(videos(before, action)).to.be.deep.equal(after)
+})
+
+it('should action SORT_VIDEO_BY_ORDER return state ordened', () => {
+  const before = deepFreeze({
+    '1': {
+      id: '1',
+      title: 'A'
+    },
+    '2': {
+      id: '2',
+      title: 'C'
+    },
+    '3': {
+      id: '3',
+      title: 'B'
+    }
+  })
+
+  const action = deepFreeze({ type: SORT_VIDEO_BY_TITLE })
+
+  const after = {
+    '1': {
+      id: '1',
+      title: 'A'
+    },
+    '3': {
+      id: '3',
+      title: 'B'
+    },
+    '2': {
+      id: '2',
+      title: 'C'
+    }
+  }
+
   expect(videos(before, action)).to.be.deep.equal(after)
 })
